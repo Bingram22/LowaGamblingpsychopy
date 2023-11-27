@@ -27,8 +27,7 @@ import os  # handy system and path functions
 import sys  # to get file system encoding
 
 from psychopy.hardware import keyboard
-
-
+from psychopy import monitors
 
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
@@ -124,8 +123,9 @@ C_idx = 0
 D_idx = 0
 
 # Default text
-borrowed_text = "借款: {}".format(f'{borrow:.0f}')
-net_worth_text = "总收入: {}".format(f'{net_worth:.0f}')
+borrowed_text = "Loan: {}".format(f'{borrow:.0f}')
+net_worth_text = "Total Income: {}".format(f'{net_worth:.0f}')
+
 
 # Default allowed keys
 allowed_keys = ['1', '2', '3', '4']
