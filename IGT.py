@@ -29,6 +29,9 @@ import sys  # to get file system encoding
 from psychopy.hardware import keyboard
 from psychopy import monitors
 
+import json
+from datetime import datetime
+
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_thisDir)
@@ -51,7 +54,28 @@ if not os.path.exists(subject_directory):
     
 filename = f'sub-{expInfo["participant"]}_ses-{expInfo["session"]}_task-igt'
 output_path = f'{subject_directory}{filename}'
-print(f'OUTPUT PATH: {output_path}')
+
+# Create JSON Metadata file
+
+# datetime object containing current date and time
+now = datetime.now()
+ 
+print("now =", now)
+
+# dd/mm/YY H:M:S
+dt_string = now.strftime("%Y-%m-%dT%H-%M-%S")
+
+metadata = {'TaskName' : 'Iowa Gambling Task',
+			'DateTime' : dt_string}
+
+
+# Serializing json
+json_object = json.dumps(metadata, indent=4)
+
+# Writing to sample.json
+with open(output_path+'.json', "w") as outfile:
+    outfile.write(json_object)
+
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
@@ -102,7 +126,7 @@ B_cards = list(filter(lambda x: x["DECK_NAME"] == "B", allCards))
 C_cards = list(filter(lambda x: x["DECK_NAME"] == "C", allCards))
 D_cards = list(filter(lambda x: x["DECK_NAME"] == "D", allCards))
 
-# Total number of trials
+# Total number of trials (default = 100)
 totalReps = 100
 
 # image path
@@ -331,6 +355,7 @@ globalClock = core.Clock()  # to track the time since experiment started
 routineTimer = core.CountdownTimer()  # to track time remaining of each (non-slip) routine 
 
 # ------Prepare to start Routine "LOAD_DECKS"-------
+win.setMouseVisible(False)
 continueRoutine = True
 # update component parameters for each repeat
 # keep track of which components have finished
@@ -349,6 +374,7 @@ LOAD_DECKSClock.reset(-_timeToFirstFrame)  # t0 is time of first possible flip
 frameN = -1
 
 # -------Run Routine "LOAD_DECKS"-------
+win.setMouseVisible(False)
 while continueRoutine:
     # get current time
     t = LOAD_DECKSClock.getTime()
@@ -403,6 +429,7 @@ INSTRClock.reset(-_timeToFirstFrame)  # t0 is time of first possible flip
 frameN = -1
 
 # -------Run Routine "INSTR"-------
+win.setMouseVisible(False)
 while continueRoutine:
     # get current time
     t = INSTRClock.getTime()
@@ -519,6 +546,7 @@ for thisTrial in trials:
     frameN = -1
     
     # -------Run Routine "TRIAL"-------
+    win.setMouseVisible(False)
     while continueRoutine:
         # get current time
         t = TRIALClock.getTime()
