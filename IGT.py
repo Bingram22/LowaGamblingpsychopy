@@ -45,7 +45,7 @@ expInfo['expName'] = expName
 expInfo['psychopyVersion'] = psychopyVersion
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-subject_directory = os.path.abspath(os.path.join(_thisDir, "../")) + os.sep + f'results/sub-{expInfo["participant"]}/ses-{expInfo["session"]}/'
+subject_directory = os.path.abspath(os.path.join(_thisDir, "../../")) + os.sep + f'results/sub-{expInfo["participant"]}/ses-{expInfo["session"]}/beh/'
 if not os.path.exists(subject_directory):
     os.makedirs(subject_directory)
     
